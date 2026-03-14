@@ -1,1 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citações sobre Música - Prof. Glauber Santiago</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #F2D499;
+            --color-brown: #8E6B4D;
+            --color-terracotta: #C45E4D;
+            --color-green: #5B8E7D;
+            --color-bg: #F7F5E6;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            min-height: 100vh;
+            color: var(--color-brown);
+        }
+        .quote-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .quote-card {
+            background-color: white;
+            border: 1px solid var(--color-cream);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .quote-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-terracotta);
+            box-shadow: 0 10px 20px -5px rgba(142, 107, 77, 0.15);
+        }
+        
+        .copied-feedback::after {
+            content: "Copiado!";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--color-green);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            animation: fadeInOut 1.5s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(5px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .btn-style {
+            transition: all 0.2s;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary { background-color: var(--color-terracotta); color: white; }
+        .btn-primary:hover { background-color: #a34b3d; transform: scale(1.02); }
+        
+        .btn-embed-std { background-color: white; border-color: var(--color-brown); color: var(--color-brown); }
+        .btn-embed-std:hover { background-color: var(--color-cream); }
+        
+        .btn-embed-dark { background-color: #1e293b; color: white; }
+        .btn-embed-dark:hover { background-color: #0f172a; }
+        
+        .btn-embed-brutalist { background-color: #fff; border: 3px solid #000; color: #000; box-shadow: 4px 4px 0px #000; border-radius: 0; }
+        .btn-embed-brutalist:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
+        
+        .btn-embed-minimal { background-color: transparent; border-bottom: 2px solid var(--color-brown); border-radius: 0; color: var(--color-brown); }
+        .btn-embed-minimal:hover { color: var(--color-terracotta); border-color: var(--color-terracotta); }
+    </style>
+</head>
+<body class="py-12 px-4 md:px-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight" style="color: var(--color-brown);">Citações sobre Música</h1>
+            <p class="text-slate-600 text-lg">Inspiração musical curada pelo Professor Glauber Santiago</p>
+            <div class="mt-4 inline-block px-3 py-1 bg-[#F2D499] text-[#8E6B4D] text-[10px] font-bold uppercase tracking-widest rounded">
+                Clique num cartão para copiar o conteúdo
+            </div>
+        </header>
+
+        <div id="grid-citacoes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="col-span-full text-center py-20 text-slate-400 font-medium animate-pulse">Sintonizando as partituras...</div>
+        </div>
+
+        <div class="flex flex-col items-center gap-8 mb-16">
+            <button id="nova" class="btn-primary btn-style px-12 text-base">
+                Nova Coleção de 6 Citações
+            </button>
+            
+            <div class="w-full max-w-4xl">
+                <p class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 italic text-center">Obter Código HTML (para o Moodle)</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <button class="btn-style btn-embed-std justify-center" onclick="generateEmbed('standard')">Tema Padrão</button>
+                    <button class="btn-style btn-embed-dark justify-center" onclick="generateEmbed('dark')">Tema Escuro</button>
+                    <!-- Ordem alterada: Minimalista antes do Brutalista -->
+                    <button class="btn-style btn-embed-minimal justify-center" onclick="generateEmbed('minimal')">Minimalista</button>
+                    <button class="btn-style btn-embed-brutalist justify-center" onclick="generateEmbed('brutalist')">Brutalista</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="border-t border-[#F2D499] pt-6 text-center text-slate-500 pb-8">
+            <p class="font-semibold text-slate-600 text-[11px] mb-1 italic">
+                DESENVOLVIDO PELO PROFESSOR GLAUBER SANTIAGO - DAC/UFSCAR
+            </p>
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px]">
+                <a href="https://servidores.ufscar.br/glauber/" target="_blank" class="hover:text-[#C45E4D]">SERVIDORES.UFSCAR.BR/GLAUBER/</a>
+                <span class="hidden md:inline">|</span>
+                <a href="https://sites.google.com/view/glauberia" target="_blank" class="hover:text-[#C45E4D]">SITES.GOOGLE.COM/VIEW/GLAUBERIA</a>
+            </div>
+        </footer>
+    </div>
+
+    <textarea id="copy-helper" class="absolute -left-[9999px] opacity-0" aria-hidden="true"></textarea>
+
+    <div id="modal-feedback" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300 text-center" id="modal-content">
+            <div class="w-12 h-12 bg-[#5B8E7D] text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2 text-[#8E6B4D]">Código Copiado!</h3>
+            <p id="modal-desc" class="text-slate-600 text-sm mb-6"></p>
+            <button onclick="fecharModal()" class="w-full bg-[#8E6B4D] text-white py-3 rounded-xl font-bold">Fechar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://vpishybqzeflcvkdbhlq.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_kWSkLBhVi1O0IKljgdko_A_Io1YFJr1";
+        let supabaseClient;
+
+        function copyText(text) {
+            const helper = document.getElementById("copy-helper");
+            helper.value = text;
+            helper.select();
+            document.execCommand('copy');
+        }
+
+        async function carregarColecao() {
+            const grid = document.getElementById("grid-citacoes");
+            grid.innerHTML = '<div class="col-span-full text-center py-20 text-slate-400 font-medium animate-pulse">Organizando as partituras...</div>';
+
+            try {
+                const promessas = Array(6).fill(null).map(async () => {
+                    const { data } = await supabaseClient.rpc("obter_citacao_musical_aleatoria");
+                    return data ? data[0] : null;
+                });
+
+                const resultados = await Promise.all(promessas);
+                grid.innerHTML = "";
+
+                resultados.filter(c => c).forEach(citacao => {
+                    const card = document.createElement("div");
+                    card.className = "quote-card p-8 rounded-2xl flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[280px]";
+                    const texto = citacao.texto || "";
+                    const autor = citacao.autor || "Anónimo";
+                    
+                    card.innerHTML = `
+                        <div class="absolute -top-1 -left-1 text-[#F2D499]/30">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V5C14.017 3.89543 14.9124 3 16.017 3H19.017C21.2261 3 23.017 4.79086 23.017 7V15C23.017 18.866 19.883 22 16.017 22H14.017V21ZM1 15V9C1 6.79086 2.79086 5 5 5H7C8.10457 5 9 5.89543 9 7V8C9 9.10457 8.10457 10 7 10H4C3.44772 10 3 10.4477 3 11V15C3 15.5523 3.44772 16 4 16H7C8.10457 16 9 16.8954 9 18V19C9 20.1046 8.10457 21 7 21H5C2.79086 21 1 19.2091 1 17V15Z"/></svg>
+                        </div>
+                        <blockquote class="quote-font text-2xl text-slate-700 leading-tight mb-8 italic z-10 text-center">${texto}</blockquote>
+                        <p class="text-[9px] font-bold text-[#C45E4D] uppercase tracking-widest text-right z-10 opacity-80">— ${autor}</p>
+                    `;
+                    card.onclick = () => {
+                        copyText('"' + texto + '" — ' + autor);
+                        card.classList.add('copied-feedback');
+                        setTimeout(() => card.classList.remove('copied-feedback'), 1500);
+                    };
+                    grid.appendChild(card);
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        function generateEmbed(type) {
+            let template = "";
+            const startMarker = "<!-- INÍCIO DO CÓDIGO DA CITAÇÃO MUSICAL ALEATÓRIA -->\n";
+            const endMarker = "\n<!-- FIM DO CÓDIGO DA CITAÇÃO MUSICAL ALEATÓRIA -->";
+            
+            const sharedScript = `<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script><script>(function(){const c=supabase.createClient("${SUPABASE_URL}","${SUPABASE_KEY}");async function u(){const {data}=await c.rpc("obter_citacao_musical_aleatoria");if(data&&data[0]){const t=document.getElementById("mq-text");const a=document.getElementById("mq-author");if(t)t.innerText=data[0].texto;if(a)a.innerText="— "+(data[0].autor||"Anónimo");}}u();})();<\/script>`;
+
+            switch(type) {
+                case 'dark':
+                    template = `<div style="background:#1e293b;border:1px solid #475569;border-radius:12px;padding:35px;margin:10px auto;max-width:600px;font-family:serif;color:#f8fafc;"><div id="mq-text" style="font-size:1.5rem;font-style:italic;margin-bottom:20px;line-height:1.4;text-align:center;">Carregando...</div><div id="mq-author" style="font-weight:bold;color:#94a3b8;text-transform:uppercase;font-size:9px;letter-spacing:1px;font-family:sans-serif;text-align:right;opacity:0.8;"></div></div>`;
+                    break;
+                case 'brutalist':
+                    template = `<div style="background:#fff;border:4px solid #000;box-shadow:8px 8px 0px #000;padding:35px;margin:10px auto;max-width:600px;font-family:sans-serif;color:#000;"><div id="mq-text" style="font-size:1.7rem;font-weight:900;margin-bottom:25px;line-height:1.1;text-transform:uppercase;text-align:center;">Carregando...</div><div id="mq-author" style="font-weight:bold;text-decoration:underline;font-size:10px;text-align:right;text-transform:uppercase;"></div></div>`;
+                    break;
+                case 'minimal':
+                    template = `<div style="padding:20px;margin:10px auto;max-width:700px;font-family:serif;color:#334155;"><div id="mq-text" style="font-size:1.4rem;font-style:italic;text-align:center;margin-bottom:12px;line-height:1.4;">Carregando...</div><div id="mq-author" style="font-weight:bold;color:#8E6B4D;text-align:right;font-size:9px;text-transform:uppercase;letter-spacing:1px;"></div></div>`;
+                    break;
+                default: // standard
+                    template = `<div style="background:#F7F5E6;border:1px solid #F2D499;border-radius:12px;padding:35px;margin:10px auto;max-width:600px;font-family:serif;color:#334155;position:relative;"><div style="color:#F2D499;position:absolute;top:-10px;left:10px;font-size:90px;opacity:0.4;line-height:1;">&ldquo;</div><div id="mq-text" style="font-size:1.45rem;font-style:italic;margin-bottom:20px;line-height:1.4;position:relative;z-index:1;text-align:center;">Carregando...</div><div id="mq-author" style="font-weight:bold;color:#C45E4D;text-transform:uppercase;font-size:9px;letter-spacing:1px;font-family:sans-serif;text-align:right;opacity:0.8;"></div></div>`;
+            }
+
+            copyText(startMarker + template + sharedScript + endMarker);
+            document.getElementById("modal-desc").innerHTML = `O código HTML <b>${type.toUpperCase()}</b> foi copiado com marcadores de início e fim. No Moodle, cole este código no editor (modo HTML <b>&lt;/&gt;</b>).`;
+            abrirModal();
+        }
+
+        function abrirModal() {
+            const m = document.getElementById('modal-feedback');
+            m.classList.remove('hidden');
+            setTimeout(() => { m.classList.add('opacity-100'); document.getElementById('modal-content').classList.replace('scale-95', 'scale-100'); }, 10);
+        }
+
+        function fecharModal() {
+            const m = document.getElementById('modal-feedback');
+            m.classList.remove('opacity-100');
+            setTimeout(() => { m.classList.add('hidden'); document.getElementById('modal-content').classList.replace('scale-100', 'scale-95'); }, 300);
+        }
+
+        document.getElementById("nova").onclick = carregarColecao;
+
+        window.onload = () => {
+            if (typeof supabase !== 'undefined') {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                carregarColecao();
+            }
+        };
+    </script>
+</body>
+</html>
